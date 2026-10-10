@@ -1,0 +1,460 @@
+{
+  "schema_version": "mimosa-task-review/v2",
+  "run_id": "20261010T034840893Z-16655-6a8d78b1db65",
+  "run_status": "inconclusive",
+  "errors": [
+    {
+      "stage": "baseline",
+      "target": ".",
+      "reason": "baseline_partial: baseline capture had enumeration or snapshot errors"
+    }
+  ],
+  "coverage": {
+    "schema_version": "mimosa-hook-coverage/v1",
+    "status": "partial",
+    "scope": "hook_observed_diff",
+    "baseline": {
+      "complete": false,
+      "captured_files": 3,
+      "candidate_limit": 5000,
+      "truncated": false,
+      "enumeration_error_count": 0,
+      "snapshot_error_count": 4,
+      "compensated_target_count": 2
+    },
+    "change_tracking": {
+      "touched_observed": 2,
+      "touched_retained": 2,
+      "truncated": false,
+      "bash_mutation": true,
+      "bash_discovered": 2,
+      "bash_discovery_limit": 80,
+      "bash_discovery_truncated": false
+    },
+    "candidates": {
+      "eligible_files": 2,
+      "selected_files": 2,
+      "limit": 20,
+      "truncated": false
+    },
+    "scanning": {
+      "required_files": 2,
+      "scanned_files": 2,
+      "skipped_files": 0,
+      "failed_files": 0,
+      "project_checks_required": 0,
+      "project_checks_completed": 0
+    },
+    "notification": {
+      "eligible_findings": 0,
+      "detailed_findings": 0,
+      "detail_limit": 3,
+      "truncated": false
+    },
+    "reason_counts": {
+      "baseline_partial": 1,
+      "project_check_failed": 1
+    },
+    "reasons": [
+      {
+        "code": "baseline_partial",
+        "stage": "baseline",
+        "target": ".",
+        "detail": "baseline capture had enumeration or snapshot errors",
+        "affects_completion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "baseline",
+        "target": ".",
+        "detail": "baseline_partial: baseline capture had enumeration or snapshot errors",
+        "affects_completion": true
+      }
+    ],
+    "reasons_truncated": false
+  },
+  "generated_at": "2026-10-10T03:48:40.893Z",
+  "session_id": "sess_aaafc084-598e-4c4a-98c2-aef038d78ad7",
+  "target": ".",
+  "revision": null,
+  "rules_version": "unavailable",
+  "diff_hash": "584efe4f6c55a1afde226ce9da02d87b03cbe29049906d1897eefc7341ff23a1",
+  "diff": {
+    "algorithm": "sha256",
+    "changed_file_count": 2,
+    "changed_files": [
+      {
+        "file": "assets/app.js",
+        "ranges": [
+          {
+            "start": 205,
+            "end": 206
+          }
+        ],
+        "before_hash": "c2014344d9831f7d03d731ba319920c6b34566f30e39999c2eb8416943b6ef37",
+        "after_hash": "bfc661bda388888933c48c7aaa4f5403260138ff3325b7013d1714ce3279a354"
+      },
+      {
+        "file": "assets/katalog-ui.js",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 206
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "b8206ae85e8f42b56b5bb2c0d5a722284bfacec7885165d37a8c4a0f09d6edbd"
+      }
+    ]
+  },
+  "timing": {
+    "started_at": "2026-10-10T03:48:40.244Z",
+    "completed_at": "2026-10-10T03:48:40.893Z",
+    "duration_ms": 649,
+    "measurement": "hook_wall_clock"
+  },
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0,
+    "model_calls": 0,
+    "measurement": "known-zero"
+  },
+  "telemetry": {
+    "schemaVersion": "mimosa-gate-telemetry/v1",
+    "profile": "gate",
+    "operation": "Stop",
+    "outcome": "partial/INCONCLUSIVE",
+    "latencyMs": 649,
+    "peakMemoryBytes": 194019328,
+    "memoryMeasurement": "max-observed-process-rss",
+    "scannedFiles": 2,
+    "cache": {
+      "hits": 0,
+      "misses": 0,
+      "measurement": "not-applicable"
+    },
+    "denyCount": 0,
+    "tokens": {
+      "input": 0,
+      "output": 0,
+      "total": 0,
+      "modelCalls": 0,
+      "measurement": "known-zero"
+    }
+  },
+  "finding_count": 0,
+  "rewake_finding_count": 0,
+  "evidence_boundary": {
+    "scan": "candidate",
+    "static_fix_verification": "observed_static_only",
+    "runtime_verification": "not_performed"
+  },
+  "finding_events": [
+    {
+      "finding_id": "mimosa-3a46c4270f44068ef66b8a88",
+      "file": "crawl.py",
+      "line": 7,
+      "rule_id": "security",
+      "severity": "medium",
+      "category": "临时文件不安全",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:24:47.300Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "2b253ad8c9e5ec325514a58659f8becf0c09108dc7477f1d965b0ce95580abe3",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-0845578b05c2806260fdb9fc",
+      "file": "crawl.py",
+      "line": 15,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "SSRF 服务端请求伪造",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:24:47.300Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "4592ba3922d64b3d1ec8025cdddeff5632531e8731e78dfd67579b8143e5d9ea",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-d8963caa0d758f9777554fc6",
+      "file": "crawl.py",
+      "line": 93,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:24:47.300Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "176c8b8bc6cff9a37be92887a287bf0d9b2647c9c594102c70d30d3b17772fc5",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-d8963caa0d758f9777554fc6",
+      "file": "crawl.py",
+      "line": 94,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:24:47.300Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "176c8b8bc6cff9a37be92887a287bf0d9b2647c9c594102c70d30d3b17772fc5",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-0845578b05c2806260fdb9fc",
+      "file": "crawl.py",
+      "line": 38,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "SSRF 服务端请求伪造",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:25:29.400Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "4592ba3922d64b3d1ec8025cdddeff5632531e8731e78dfd67579b8143e5d9ea",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-7b05fb6ccd2d27ed82150d95",
+      "file": "crawl.py",
+      "line": 128,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:25:29.400Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "a1621debd2c83df33a2db0c9026f3d3c01c0995193879129e3dba7b3b49fa9eb",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-7b05fb6ccd2d27ed82150d95",
+      "file": "crawl.py",
+      "line": 129,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:25:29.400Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "a1621debd2c83df33a2db0c9026f3d3c01c0995193879129e3dba7b3b49fa9eb",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-7b05fb6ccd2d27ed82150d95",
+      "file": "crawl.py",
+      "line": 133,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:26:54.055Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "a1621debd2c83df33a2db0c9026f3d3c01c0995193879129e3dba7b3b49fa9eb",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-73e418bb620f9d637c4706bf",
+      "file": "crawl.py",
+      "line": 134,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:26:54.056Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "01a6be0f2f437ea7596208c6fdb1995a2ddc85847b2f19ed16b0d8953fedc931",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-de53f994a311575a7bc8eb18",
+      "file": "crawl.py",
+      "line": 9,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:27:12.125Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "4cae2bd9bbe48a18f22f33cea23b2782102c3b5b285d4a99333b24db79062ff6",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-de53f994a311575a7bc8eb18",
+      "file": "crawl.py",
+      "line": 11,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:27:12.125Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "4cae2bd9bbe48a18f22f33cea23b2782102c3b5b285d4a99333b24db79062ff6",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-b18d38fdadec17cfc3d96060",
+      "file": "",
+      "line": 122,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:27:44.836Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "efd072fe3cf3d3f053c8d93c4e27006d5065666eb67e69d4b5a8a44304d29279",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-b18d38fdadec17cfc3d96060",
+      "file": "",
+      "line": 124,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "blocked",
+      "decision": "deny",
+      "at": "2026-10-10T03:27:44.836Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "efd072fe3cf3d3f053c8d93c4e27006d5065666eb67e69d4b5a8a44304d29279",
+        "runtime_oracle": false
+      }
+    },
+    {
+      "finding_id": "mimosa-b18d38fdadec17cfc3d96060",
+      "file": "",
+      "line": 124,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "fixed_candidate",
+      "decision": "repair_observed",
+      "at": "2026-10-10T03:28:21.478Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "efd072fe3cf3d3f053c8d93c4e27006d5065666eb67e69d4b5a8a44304d29279",
+        "candidate_before_evidence_hash": "efd072fe3cf3d3f053c8d93c4e27006d5065666eb67e69d4b5a8a44304d29279",
+        "post_change_evidence_hash_at_previous_location": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runtime_oracle": false,
+        "verification": {
+          "method": "mimosa-posttool-static-rescan",
+          "finding_absent": true,
+          "runtime_oracle": false
+        }
+      }
+    },
+    {
+      "finding_id": "mimosa-b18d38fdadec17cfc3d96060",
+      "file": "",
+      "line": 124,
+      "rule_id": "security",
+      "severity": "high",
+      "category": "路径穿越",
+      "status": "static_verified",
+      "decision": "static_rescan_passed",
+      "at": "2026-10-10T03:28:21.478Z",
+      "evidence": {
+        "kind": "static_scan",
+        "boundary": "observed",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "efd072fe3cf3d3f053c8d93c4e27006d5065666eb67e69d4b5a8a44304d29279",
+        "candidate_before_evidence_hash": "efd072fe3cf3d3f053c8d93c4e27006d5065666eb67e69d4b5a8a44304d29279",
+        "post_change_evidence_hash_at_previous_location": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runtime_oracle": false,
+        "verification": {
+          "method": "mimosa-posttool-static-rescan",
+          "finding_absent": true,
+          "runtime_oracle": false
+        }
+      }
+    }
+  ],
+  "findings": [],
+  "artifacts": {
+    "immutable_report": ".mimosa/reports/task-review-sess_aaafc084-598e-4c4a-98c2-aef038d78ad7-20261010T034840893Z-16655-6a8d78b1db65.json",
+    "latest_report": ".mimosa/reports/task-review-sess_aaafc084-598e-4c4a-98c2-aef038d78ad7.json",
+    "history_summary": ".mimosa/history/run-20261010T034840893Z-16655-6a8d78b1db65.json"
+  }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Alle Förderungen — Meine Förderungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..640&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 27V7M7 16h13M17 7h8v8M25 7 15.5 16.5' stroke='%234ADE80' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.list-tools{display:flex;flex-direction:column;gap:14px;margin:18px 0 8px}
+.search-row{display:flex;gap:10px}
+.search-row input{
+  flex:1;border:1px solid var(--line);border-radius:12px;background:var(--card);
+  color:var(--text);font:inherit;padding:13px 16px;outline:none;
+}
+.search-row input:focus{border-color:var(--mint)}
+.f-row{display:flex;flex-wrap:wrap;gap:8px}
+.f-chip{
+  border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:.85rem;
+  background:var(--card);color:var(--muted);cursor:pointer;font-family:inherit;
+}
+.f-chip.on{border-color:var(--mint);color:var(--text);background:rgba(14,159,110,.08)}
+.result-count{font-size:.88rem;color:var(--muted);margin:14px 0 6px}
+.f-list{display:flex;flex-direction:column}
+.f-item{
+  border-bottom:1px solid var(--line);padding:16px 4px;cursor:pointer;
+}
+.f-item:hover{background:var(--card)}
+.f-item .t{font-weight:680;font-size:1rem;margin-bottom:3px}
+.f-item .amt{color:var(--mint);font-weight:640;font-size:.92rem;margin-bottom:4px}
+.f-item .m{color:var(--muted);font-size:.82rem;display:flex;flex-wrap:wrap;gap:4px 12px}
+.more-btn{margin:20px auto 0;max-width:280px}
+</style>
+</head>
+<body class="theme-light">
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><span data-logo data-color="var(--mint)" data-size="30"></span> Meine Förderungen</a>
+    <nav class="nav-links"><a href="foerderungen.html">Förderungen</a><a href="index.html#faq">FAQ</a></nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:36px">
+  <p class="b-label">Der komplette Katalog</p>
+  <h1 class="display serif" style="font-size:clamp(1.9rem,5vw,2.7rem)">Alle Förderungen.</h1>
+  <p style="color:var(--muted);max-width:56ch">Jede Förderung Österreichs — Bund und alle 9 Bundesländer. Kostenlos, ohne Registrierung. Tipp auf eine Förderung für alle Details.</p>
+
+  <div class="list-tools">
+    <div class="search-row">
+      <input type="search" id="q" placeholder="Suchen: Wohnen, Familie, PV, Pendler …">
+    </div>
+    <div class="f-row" id="landFilter"></div>
+    <div class="f-row" id="bereichFilter"></div>
+  </div>
+
+  <div class="result-count" id="count"></div>
+  <div class="f-list" id="list"></div>
+  <button class="btn btn-ghost more-btn" id="more" style="display:none">Mehr anzeigen</button>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="f-links">
+      <a href="foerderungen.html"><b>Alle Förderungen</b></a><a href="check.html">Schnell-Check</a><a href="index.html#faq">FAQ</a>
+    </div>
+    <div class="f-copy">© 2026 Meine Förderungen.at</div>
+    <div class="f-legal">
+      <a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a><a href="index.html#faq">FAQ</a><a href="entwickler.html">Entwickler</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script src="assets/katalog-ui.js"></script>
+</body>
+</html>

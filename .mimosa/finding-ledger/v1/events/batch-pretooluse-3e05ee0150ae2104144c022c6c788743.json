@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "mimosa-finding-ledger-batch/v1",
+  "batchId": "pretooluse-3e05ee0150ae2104144c022c6c788743",
+  "runId": null,
+  "runStatus": "completed",
+  "coverage": {
+    "status": "complete",
+    "reasons": []
+  },
+  "source": {
+    "component": "zcode-hook",
+    "operationId": "PreToolUse"
+  },
+  "revision": null,
+  "diffHash": null,
+  "rulesVersion": null,
+  "sessionHash": "c4cefba5605c3303c88b3873dcd450430219c03d052c19dc968d96b647bcb695",
+  "reportRef": null,
+  "events": [
+    {
+      "eventId": "hook-dd78c63843330fc2d2ace0554395bcde",
+      "findingId": "mimosa-3a46c4270f44068ef66b8a88",
+      "type": "finding_blocked",
+      "at": "2026-10-10T03:24:47.300Z",
+      "identity": {
+        "projectRelativeFile": "crawl.py",
+        "ruleId": "security",
+        "codeEvidenceHash": "2b253ad8c9e5ec325514a58659f8becf0c09108dc7477f1d965b0ce95580abe3",
+        "confidence": "stable"
+      },
+      "scope": "direct",
+      "line": 7,
+      "endLine": 7,
+      "reasonCode": "deny",
+      "reportedToAgent": true,
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "evidenceHash": "2b253ad8c9e5ec325514a58659f8becf0c09108dc7477f1d965b0ce95580abe3"
+      },
+      "sequence": 0
+    },
+    {
+      "eventId": "hook-548e64ae3a002ac6080329985c342090",
+      "findingId": "mimosa-0845578b05c2806260fdb9fc",
+      "type": "finding_blocked",
+      "at": "2026-10-10T03:24:47.300Z",
+      "identity": {
+        "projectRelativeFile": "crawl.py",
+        "ruleId": "security",
+        "codeEvidenceHash": "4592ba3922d64b3d1ec8025cdddeff5632531e8731e78dfd67579b8143e5d9ea",
+        "confidence": "stable"
+      },
+      "scope": "direct",
+      "line": 15,
+      "endLine": 15,
+      "reasonCode": "deny",
+      "reportedToAgent": true,
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "evidenceHash": "4592ba3922d64b3d1ec8025cdddeff5632531e8731e78dfd67579b8143e5d9ea"
+      },
+      "sequence": 1
+    },
+    {
+      "eventId": "hook-092f148e44fe12c0c1285889b6dd04cd",
+      "findingId": "mimosa-d8963caa0d758f9777554fc6",
+      "type": "finding_blocked",
+      "at": "2026-10-10T03:24:47.300Z",
+      "identity": {
+        "projectRelativeFile": "crawl.py",
+        "ruleId": "security",
+        "codeEvidenceHash": "176c8b8bc6cff9a37be92887a287bf0d9b2647c9c594102c70d30d3b17772fc5",
+        "confidence": "stable"
+      },
+      "scope": "direct",
+      "line": 93,
+      "endLine": 93,
+      "reasonCode": "deny",
+      "reportedToAgent": true,
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "evidenceHash": "176c8b8bc6cff9a37be92887a287bf0d9b2647c9c594102c70d30d3b17772fc5"
+      },
+      "sequence": 2
+    },
+    {
+      "eventId": "hook-b10b4d989e243648045d2c3668ee7b94",
+      "findingId": "mimosa-d8963caa0d758f9777554fc6",
+      "type": "finding_blocked",
+      "at": "2026-10-10T03:24:47.300Z",
+      "identity": {
+        "projectRelativeFile": "crawl.py",
+        "ruleId": "security",
+        "codeEvidenceHash": "176c8b8bc6cff9a37be92887a287bf0d9b2647c9c594102c70d30d3b17772fc5",
+        "confidence": "stable"
+      },
+      "scope": "direct",
+      "line": 94,
+      "endLine": 94,
+      "reasonCode": "deny",
+      "reportedToAgent": true,
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "evidenceHash": "176c8b8bc6cff9a37be92887a287bf0d9b2647c9c594102c70d30d3b17772fc5"
+      },
+      "sequence": 3
+    }
+  ],
+  "observedFindingIds": [],
+  "verifiedFiles": [],
+  "recordedAt": "2026-10-10T03:24:47.495Z"
+}

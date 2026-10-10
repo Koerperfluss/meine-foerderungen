@@ -1,0 +1,261 @@
+/* HolDirMehr — echter Katalog: Listing, Detail, Bericht-Matching. Alles kostenlos, offline-fähig. */
+
+const K = {
+  data: null,
+  bySlug: {},
+  async load(){
+    if(this.data) return this.data;
+    if(window.KATALOG){ this.data = window.KATALOG; }              // embedded (offline/file://)
+    else { const r = await fetch('data/katalog.json'); this.data = await r.json(); }
+    this.bySlug = {};
+    this.data.forEach(f => this.bySlug[f.slug] = f);
+    return this.data;
+  },
+  profil(){ try{ return JSON.parse(localStorage.getItem('hdm-profil')||'{}'); }catch(e){ return {}; } },
+  /* Bundesland normalisieren aus area-String */
+  land(f){
+    const a=(f.area||'').toLowerCase();
+    const l=['wien','niederösterreich','oberösterreich','salzburg','steiermark','tirol','kärnten','vorarlberg','burgenland'];
+    for(const x of l) if(a.includes(x)) return x.charAt(0).toUpperCase()+x.slice(1);
+    return 'Bundesweit';
+  },
+  betrag(f){ return (f.subtitle||'').trim(); },
+  /* Firmen-/Gemeinde-/Vereins-Förderung erkennen */
+  isFirm(f){
+    const hay=((f.antragsteller||'')+' '+(f.name||'')+' '+(f.desc||'')).toLowerCase();
+    return /(unternehmen|unternehmens|betrieb|gemeinde|marktgemeinde|stadtgemeinde|\bverein|landwirt|land-? und forstwirtschaft|stiftung|\bkmu\b|gewerbe|lwk|wkö)/.test(hay)
+      && !/privatperson/.test((f.antragsteller||'').toLowerCase());
+  },
+  /* €-Maximalbetrag grob aus subtitle */
+  maxEuro(text){
+    if(!text) return 0;
+    if(/laufend|pro monat|pro jahr|monatlich|jährlich|%|darlehen|befreiung|kostenanteil|pro betreuung/i.test(text) && !/bis zu/i.test(text)) return 0;
+    const m=text.match(/bis zu\s*(?:€\s?|€)?([\d.]+)/i) || text.match(/([\d.]+)\s*(?:€|euro|EUR)/i) || text.match(/€\s?([\d.]+)/i);
+    if(!m) return 0;
+    const v=parseInt(m[1].replace(/\./g,''),10);
+    return isNaN(v)?0:v;
+  },
+  /* Quiz-Vorhaben ↔ Förderung matchen (berücksichtigt Profil-Zusatzangaben) */
+  themaKeywords:{
+    'Heizung tauschen':['heiz','wärmepumpe','öl','gas','kessel','pellets','fernwärme','energie'],
+    'Solar & Photovoltaik':['photovoltaik','pv','solar','stromspeicher'],
+    'Sanierung':['sanierung','dämm','fassade','dach','fenster','wohnbau','renovier'],
+    'E-Mobilität':['e-auto','elektro','kfz','fahrzeug','lade','mobilität','pendler','bike','fahrrad'],
+    'Familie & Kinder':['familie','kind','kinder','elter','geburt','beihilfe','betreu'],
+    'Bildung & Weiterbildung':['bildung','schule','studium','lehre','weiterbild','kurs','schüler','student','stipendium'],
+    'Beruf & Arbeitssuche':['arbeit','job','beruf','pendler','arbeitslos','gründ','selbstständig','wiedereinsteig'],
+    'Gesundheit':['gesundheit','pflege','therapie','behinder','krank','psycho','zuzahl','reha','medikament'],
+    'Wohnen & Bausparen':['bauspar','wohnen','miete','wohnbeihilfe','immobilie','eigentum','haus','wohnung'],
+  },
+  match(vorhaben, land, prof={}){
+    const kws=(this.themaKeywords[vorhaben]||[]);
+    const beruf=prof.beruf||'', beh=prof.behinderung||'';
+    const scores=[];
+    for(const f of this.data){
+      const hay=((f.bereich||'')+' '+(f.name||'')+' '+(f.subtitle||'')+' '+(f.desc||'')).toLowerCase();
+      let s=0;
+      for(const k of kws) if(hay.includes(k)) s += k.length>6?2:1;
+      if(s>0){
+        const fl=this.land(f);
+        if(fl===land) s+=3; else if(fl==='Bundesweit') s+=1.5;
+        if(beruf==='Pension' && /pension|senior|ältere/.test(hay)) s+=2;
+        if(beruf==='Selbstständig' && /gründ|selbstständi|einzelnunternehm|eiu/.test(hay)) s+=2;
+        if(beruf==='Berufstätig' && /pendler|arbeitnehmer|beschäftig|weiterbild|ausbild/.test(hay)) s+=1.5;
+        if(beh==='Ja' && /behinder|barrierefrei|invalid/.test(hay)) s+=3;
+        if(beh==='Nein' && /behinderung|invaliditäts/.test(hay)) s-=2;
+        scores.push([s, f]);
+      }
+    }
+    scores.sort((a,b)=>b[0]-a[0] || this.maxEuro(this.betrag(b[1]))-this.maxEuro(this.betrag(a[1])));
+    return scores.map(x=>x[1]);
+  },
+};
+window.K = K;
+
+/* ============ Listing (foerderungen.html) ============ */
+async function listingInit(){
+  const list=document.getElementById('list'); if(!list) return;
+  await K.load();
+  const data=K.data;
+  const LÄNDER=['Alle','Bundesweit','Wien','Niederösterreich','Oberösterreich','Salzburg','Steiermark','Tirol','Kärnten','Vorarlberg','Burgenland'];
+  const bereiche=[...new Set(data.map(f=>f.bereich).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de')).slice(0,18);
+  let fLand='Alle', fBereich='', shown=30;
+  const landWrap=document.getElementById('landFilter'), bereichWrap=document.getElementById('bereichFilter');
+  landWrap.innerHTML=LÄNDER.map((l,i)=>`<button class="f-chip${i===0?' on':''}" data-l="${l}">${l}</button>`).join('');
+  bereichWrap.innerHTML=bereiche.map(b=>`<button class="f-chip" data-b="${b}">${b}</button>`).join('');
+  function filtered(){
+    const q=document.getElementById('q').value.trim().toLowerCase();
+    return data.filter(f=>{
+      if(fLand!=='Alle' && K.land(f)!==fLand) return false;
+      if(fBereich && f.bereich!==fBereich) return false;
+      if(q){
+        const hay=((f.name||'')+' '+(f.subtitle||'')+' '+(f.desc||'')+' '+(f.bereich||'')).toLowerCase();
+        if(!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }
+  function render(){
+    const res=filtered();
+    document.getElementById('count').textContent=`${res.length.toLocaleString('de-AT')} Förderungen`;
+    list.innerHTML=res.slice(0,shown).map(()=>`
+      <div class="f-item">
+        <div class="t"></div>
+        <div class="amt"></div>
+        <div class="m"><span class="l"></span><span class="b"></span><span class="p"></span></div>
+      </div>`).join('');
+    [...list.children].forEach((el,i)=>{
+      const f=res[i];
+      el.onclick=()=>location.href='foerderung.html?id='+encodeURIComponent(f.slug);
+      el.querySelector('.t').textContent=f.name;
+      el.querySelector('.amt').textContent=K.betrag(f)||'—';
+      el.querySelector('.l').textContent=K.land(f)+(f.geprueft?` · geprüft ${f.geprueft}`:'');
+      el.querySelector('.b').textContent=f.bereich||'';
+      el.querySelector('.p').textContent=f.provider||'';
+    });
+    document.getElementById('more').style.display = res.length>shown ? 'block':'none';
+  }
+  landWrap.onclick=e=>{ const b=e.target.closest('.f-chip'); if(!b) return;
+    fLand=b.dataset.l; [...landWrap.children].forEach(c=>c.classList.toggle('on',c===b)); shown=30; render(); };
+  bereichWrap.onclick=e=>{ const b=e.target.closest('.f-chip'); if(!b) return;
+    fBereich=(fBereich===b.dataset.b)?'':b.dataset.b; [...bereichWrap.children].forEach(c=>c.classList.toggle('on',c===b&&fBereich===b.dataset.b)); shown=30; render(); };
+  document.getElementById('q').oninput=()=>{ shown=30; render(); };
+  document.getElementById('more').onclick=()=>{ shown+=30; render(); };
+  render();
+}
+listingInit();
+
+/* ============ Bericht: echte Katalog-Treffer ============ */
+let __picked=[];
+async function upgradeBericht(){
+  const list=document.getElementById('rankList'); if(!list||!window.__berichtCtx) return;
+  await K.load();
+  const {bl,vh}=window.__berichtCtx;
+  const prof=K.profil();
+  const firms=document.getElementById('firms')?.checked;
+  const seen=new Set(); const rows=[];
+  for(const t of vh){
+    for(const f of K.match(t,bl,prof)){
+      if(seen.has(f.slug)) continue;
+      if(!firms && K.isFirm(f)) continue;          // Firmen-Default: aus
+      seen.add(f.slug); rows.push(f);
+    }
+  }
+  if(rows.length<8){
+    for(const t of ['Familie & Kinder','Wohnen & Bausparen']){
+      for(const f of K.match(t,bl,prof)){
+        if(seen.has(f.slug)||(!firms && K.isFirm(f))) continue;
+        seen.add(f.slug); rows.push(f);
+      }
+    }
+  }
+  const picked=rows.slice(0,15);
+  __picked=picked;
+  if(!picked.length) return;
+
+  list.innerHTML=picked.map((f,i)=>`
+    <div class="rank-row">
+      <div class="rhead">
+        <div class="rk">#${i+1}</div>
+        <div class="mid">
+          <div class="who">${K.land(f)} <span class="cat">· ${f.bereich||'Förderung'}</span></div>
+          <div class="who" style="font-weight:680"></div>
+          <div class="meta">
+            <span>${I.doc} Details ausklappbar</span>
+            ${f.official?`<span>${I.arrow} offizieller Antrag verfügbar</span>`:''}
+          </div>
+        </div>
+        <div class="amt"><span class="v"></span><span class="chev">${I.chev}</span></div>
+      </div>
+      <div class="plan-detail">
+        <div class="pd-h">Was du bekommst</div>
+        <p style="font-size:.92rem;color:var(--text);margin-bottom:12px"></p>
+        ${f.official?`<a class="pd-doc" style="text-decoration:none;color:var(--mint);font-weight:680" href="${f.official}" target="_blank" rel="noopener">Offizielles Formular / Förderstelle ↗</a>`:''}
+        <a class="pd-doc" style="text-decoration:none" href="foerderung.html?id=${encodeURIComponent(f.slug)}">Detailseite ansehen →</a>
+      </div>
+    </div>`).join('');
+  [...list.querySelectorAll('.rank-row')].forEach((row,i)=>{
+    const f=picked[i];
+    row.querySelector('.who[style]').textContent=f.name;
+    row.querySelector('.v').textContent=K.betrag(f)||'—';
+    row.querySelector('.plan-detail p').textContent=f.desc||'';
+    row.querySelector('.rhead').addEventListener('click',()=>row.classList.toggle('open'));
+  });
+  list.querySelector('.rank-row')?.classList.add('open');
+
+  // Kopf: echte Anzahl + echte Summe aus Höchstbeträgen
+  const sum=picked.reduce((s,f)=>s+K.maxEuro(K.betrag(f)),0);
+  const nf=document.getElementById('nFoer'); if(nf) nf.textContent=picked.length;
+  const amt=document.getElementById('amount');
+  if(amt && sum>0) amt.textContent='~€'+String(sum).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  const am=document.getElementById('amount-mini');
+  if(am) am.textContent=amt?amt.textContent:'';
+}
+document.getElementById('firms')?.addEventListener('change',upgradeBericht);
+upgradeBericht();
+
+/* ============ Zusatzangaben (optional, genauere Treffer) ============ */
+function zusatzInit(){
+  const b=document.getElementById('zBeruf'), h=document.getElementById('zBeh'), s=document.getElementById('zSave');
+  if(!b) return;
+  const p=K.profil();
+  if(p.beruf) b.value=p.beruf;
+  if(p.behinderung) h.value=p.behinderung;
+  s.addEventListener('click',()=>{
+    const np=K.profil();
+    if(b.value) np.beruf=b.value; else delete np.beruf;
+    if(h.value) np.behinderung=h.value; else delete np.behinderung;
+    try{ localStorage.setItem('hdm-profil', JSON.stringify(np)); }catch(e){}
+    s.textContent='✓ Gespeichert — Treffer werden aktualisiert';
+    setTimeout(()=>{ s.textContent='Angaben übernehmen'; },1800);
+    upgradeBericht();
+  });
+}
+zusatzInit();
+
+/* ============ PDF/Druck ============ */
+(function(){
+  const b=document.getElementById('printBtn'); if(!b) return;
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.rank-row').forEach(r=>r.classList.add('open'));
+    setTimeout(()=>window.print(),120);
+  });
+})();
+
+/* ============ Detail (foerderung.html?id=slug) ============ */
+async function detailInit(){
+  const el=document.getElementById('detail'); if(!el) return;
+  await K.load();
+  const id=new URLSearchParams(location.search).get('id');
+  const f=K.bySlug[id] || K.data[0];
+  document.title=f.name+' — HolDirMehr';
+  el.innerHTML=`
+    <p class="b-label">${K.land(f)}${f.provider?` · ${f.provider}`:''}${f.geprueft?` · geprüft am ${f.geprueft}`:''}</p>
+    <h1 class="display serif" style="font-size:clamp(1.7rem,5vw,2.5rem)"></h1>
+    <p style="color:var(--mint);font-weight:680;margin-top:10px"></p>
+    <p style="color:var(--muted);margin-top:16px;max-width:62ch"></p>
+    <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:20px">
+      ${f.bereich?`<span class="chip">${f.bereich}</span>`:''}
+      ${f.antragsteller?`<span class="chip">Antragsteller: ${f.antragsteller}</span>`:''}
+    </div>
+    ${f.official?`<a class="btn btn-primary" style="max-width:420px;margin-top:26px" href="${f.official}" target="_blank" rel="noopener">Zum offiziellen Antrag ↗</a>`:''}
+    <a class="btn btn-ghost" style="max-width:420px;margin-top:12px" href="check.html">Passt das zu mir? Schnell-Check starten</a>
+    <p style="color:var(--faint);font-size:.8rem;margin-top:10px">Quelle: holdirmehr.at — Kopie für private Nutzung. Bitte Bedingungen bei der Förderstelle prüfen.</p>`;
+  el.querySelector('h1').textContent=f.name;
+  const [pSub,pDesc]=el.querySelectorAll('h1 ~ p');
+  pSub.textContent=K.betrag(f)||'—';
+  pDesc.textContent=f.desc||'';
+  // Ähnliche
+  const aehnlichWrap=document.getElementById('aehnlich');
+  if(aehnlichWrap){
+    const hits=(f.aehnlich||[]).map(t=>K.data.find(x=>x.name===t)).filter(Boolean);
+    if(hits.length){
+      aehnlichWrap.innerHTML=hits.map(h=>`<a class="f-item" href="foerderung.html?id=${encodeURIComponent(h.slug)}"><div class="t"></div><div class="amt"></div></a>`).join('');
+      [...aehnlichWrap.querySelectorAll('.f-item')].forEach((item,i)=>{
+        item.querySelector('.t').textContent=hits[i].name;
+        item.querySelector('.amt').textContent=K.betrag(hits[i])||'—';
+      });
+    } else document.getElementById('aehnlichSect').style.display='none';
+  }
+}
+detailInit();

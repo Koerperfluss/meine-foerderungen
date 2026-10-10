@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dein Förderbericht — Meine Förderungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..640&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 27V7M7 16h13M17 7h8v8M25 7 15.5 16.5' stroke='%234ADE80' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="theme-light">
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><span data-logo data-color="var(--mint)" data-size="30"></span> Meine Förderungen</a>
+    <nav class="nav-links"><a href="index.html#foerderungen">Förderungen</a><a href="index.html#faq">FAQ</a></nav>
+  </div>
+</header>
+
+<!-- KOPF -->
+<div class="wrap b-head">
+  <p class="b-label">Für deine Situation</p>
+  <div class="b-amount serif" id="amount">€14.500–€17.000</div>
+  <p class="b-sub">realistisch kombinierbar — aus deinen <b id="nFoer">46</b> Förderungen</p>
+  <div class="b-badges">
+    <span class="ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg> aus <span id="nQuellen">20</span> Quellen geprüft</span>
+    <span class="ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg> komplett kostenlos — kein Abo, keine Zahlung</span>
+    <span class="warn" id="warnRow" style="display:none"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 7v6"/><circle cx="12" cy="16.6" r=".4" fill="currentColor"/></svg> <span class="wtxt">2 Förderungen musst du beantragen, BEVOR du startest — sonst verfallen sie.</span></span>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:18px">
+    <label id="strictWrap" style="display:flex;gap:7px;align-items:center;font-size:.86rem;color:var(--muted);cursor:pointer"><input type="checkbox" id="strict" checked style="accent-color:var(--mint)"> Nur Niederösterreich + Bundesweit</label>
+    <label id="firmsWrap" style="display:flex;gap:7px;align-items:center;font-size:.86rem;color:var(--muted);cursor:pointer"><input type="checkbox" id="firms" style="accent-color:var(--mint)"> Auch Firmen- &amp; Gemeinde-Förderungen zeigen</label>
+    <button id="printBtn" class="btn btn-ghost" style="width:auto;padding:8px 14px;font-size:.86rem">🖨 Als PDF speichern</button>
+  </div>
+</div>
+
+<!-- RANGLISTE -->
+<div class="wrap b-sect">
+  <h2>So teilt sich dein Betrag auf</h2>
+  <p class="sub"><b>Höchstbeträge</b> — sortiert nach Passung. Tipp auf eine Förderung für den kompletten Antrags-Plan.</p>
+  <div class="rank-list" id="rankList"></div>
+  <div class="report-summary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--mint);flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><span>Dein Bericht: <b>38 Schritt-Anleitungen</b> · <b>146 Dokumente</b> · <b>134 Experten-Tipps</b> — alles frei zugänglich.</span></div>
+  <div class="min-value"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><span><b style="color:var(--text)">Mindestwert</b> — 5 Förderungen nennen keinen fixen Betrag; die volle Rechnung steht in deinem Bericht.</span></div>
+</div>
+
+<!-- TESTIMONIAL -->
+<div class="wrap b-sect">
+  <div class="testimonial">
+    <div class="stars">★★★★★</div>
+    <span class="quote">„Endlich vollständig: alle Förderungen, die zu meiner Situation passen."</span>
+    <div class="t-meta">— Platzhalter</div>
+  </div>
+</div>
+
+<!-- DEIN PLAN -->
+<div class="wrap b-sect" style="padding-top:36px">
+  <p class="b-label">Für dich — komplett kostenlos</p>
+  <h2 class="display serif" style="font-size:clamp(2rem,6vw,3rem)">Dein <span id="amount-mini">~€14.500</span>-Förderplan</h2>
+  <p class="chips-label" style="margin-top:18px">Berechnet aus deinen Angaben:</p>
+  <div class="chips" id="chips"></div>
+  <p style="color:var(--muted);margin-top:22px">So kombinierst du deine <b style="color:var(--text)"><span id="nFoer2">46</span> Förderungen</b> richtig.</p>
+
+  <div id="zExtras" style="border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:24px;background:var(--card)">
+    <b style="font-size:.95rem">Genauere Treffer (optional)</b>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+      <label style="flex:1;min-width:200px;font-size:.86rem;color:var(--muted)">Beschäftigung
+        <select id="zBeruf" style="width:100%;margin-top:5px;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff">
+          <option value="">Keine Angabe</option><option>Berufstätig</option><option>Pension</option><option>Selbstständig</option>
+        </select></label>
+      <label style="flex:1;min-width:200px;font-size:.86rem;color:var(--muted)">Behinderung / Barrierefreiheit relevant
+        <select id="zBeh" style="width:100%;margin-top:5px;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff">
+          <option value="">Keine Angabe</option><option>Ja</option><option>Nein</option>
+        </select></label>
+    </div>
+    <button id="zSave" class="btn btn-primary" style="width:auto;padding:10px 18px;font-size:.9rem;margin-top:14px">Angaben übernehmen</button>
+    <span style="font-size:.8rem;color:var(--faint);margin-left:10px">Wird nur lokal in deinem Browser gespeichert.</span>
+  </div>
+
+  <div class="plans">
+    <div class="plan voll">
+      <div class="h">Dein voller Plan · kostenlos</div>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg> <span><b>Welche Förderung</b> hinter jedem Betrag steckt</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg> <span><b>Antrags-Pläne Schritt für Schritt</b> — direkt aufklappbar</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg> <span><b>Unterlagen-Checklisten + Experten-Tipps</b> pro Förderung</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg> <span><b>Kombi-Reihenfolge</b> — was du zuerst beantragen musst</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="testimonial" style="margin-top:22px">
+    <div class="stars">★★★★★</div>
+    <span class="quote">„Von 1.148 Förderungen bleiben so genau die übrig, die ich wirklich nutzen kann."</span>
+    <div class="t-meta">— Platzhalter</div>
+  </div>
+
+  <div class="guarantee">
+    <div class="h"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3 5 6v6c0 4.4 3 7.5 7 9 4-1.5 7-4.6 7-9V6z"/></svg> Deshalb gibt es diesen Förder-Finder.</div>
+    <q>"Tausende Euro Fördergeld liegen jedes Jahr brach — weil's niemand erklärt. Das soll hier enden."</q>
+    <div class="w">— privates Projekt von Sascha · Datenquelle: holdirmehr.at</div>
+  </div>
+
+  <div style="margin-top:26px;text-align:center">
+    <button class="btn btn-primary" style="max-width:360px" onclick="location.href='check.html'">Weitere Vorhaben prüfen →</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <p class="disclaimer">Alle Angaben ohne Gewähr. Dies ist keine Rechts- oder Steuerberatung. Bitte prüfe die aktuellen Bedingungen direkt bei der jeweiligen Förderstelle.</p>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="f-links">
+      <a href="index.html#foerderungen"><b>Alle Förderungen</b></a><a href="#">Bundesweit</a><a href="#">Wien</a><a href="#">Niederösterreich</a><a href="#">Oberösterreich</a><a href="#">Salzburg</a><a href="#">Steiermark</a><a href="#">Tirol</a><a href="#">Kärnten</a><a href="#">Vorarlberg</a><a href="#">Burgenland</a><a href="#">Themen</a><a href="#">Neu &amp; geändert</a>
+    </div>
+    <div class="f-copy">© 2026 Meine Förderungen.at</div>
+    <div class="f-legal">
+      <a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a><a href="index.html#faq">FAQ</a><a href="#">Über uns</a><a href="entwickler.html">Entwickler</a><a href="#">Cookie-Einstellungen</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script src="assets/katalog.js"></script>
+<script src="assets/katalog-ui.js"></script>
+<script>
+  // "46 Förderungen" auch in der Plan-Sektion synchron halten
+  const nf=document.getElementById('nFoer'), nf2=document.getElementById('nFoer2');
+  if(nf&&nf2) nf2.textContent=nf.textContent;
+  new MutationObserver(()=>{ if(nf&&nf2) nf2.textContent=nf.textContent; })
+    .observe(nf,{childList:true,characterData:true,subtree:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Meine Förderungen — Finde deine Förderungen in Österreich</title>
+<meta name="description" content="Österreichs Förder-Dschungel — für dich sortiert. Im Schnitt 9 passende Förderungen pro Anfrage, aus über 5.000 Programmen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..640&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 27V7M7 16h13M17 7h8v8M25 7 15.5 16.5' stroke='%234ADE80' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<style>svg.ic{width:16px;height:16px}</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><span data-logo data-color="var(--mint)" data-size="30"></span> Meine Förderungen</a>
+    <nav class="nav-links"><a href="foerderungen.html">Förderungen</a><a href="#faq">FAQ</a></nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="wrap hero">
+  <h1>Österreichs Förder-Dschungel<br>— für dich sortiert.</h1>
+
+  <textarea id="freeText" placeholder='z.B. "Familie mit 2 Kindern, Wien, Mieter, Familienförderung"'></textarea>
+  <p class="hint">Je konkreter du schreibst, desto genauer dein Ergebnis.</p>
+  <button class="btn btn-primary" id="findBtn">Förderungen finden <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+
+  <div class="divider-or">oder</div>
+  <button class="btn btn-ghost" onclick="location.href='check.html'">Schnell-Check starten (6 Fragen)</button>
+  <button class="btn btn-primary" id="meinBericht" style="display:none;margin-top:10px;background:var(--btn);color:var(--btn-text)">Mein Bericht öffnen →</button>
+  <p id="profilHinweis" style="display:none;text-align:center;font-size:.84rem;color:var(--muted);margin-top:10px">Deine Angaben sind in diesem Browser gespeichert — <a href="check.html" style="color:var(--mint);text-decoration:underline">ändern</a></p>
+
+  <div class="trust">
+    <span class="t"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Keine Registrierung</span>
+    <span class="t"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg> Check kostenlos</span>
+    <span class="t"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3 5 6v6c0 4.4 3 7.5 7 9 4-1.5 7-4.6 7-9V6z"/></svg> Bericht komplett kostenlos, kein Abo</span>
+  </div>
+
+  <div class="testimonial">
+    <div class="stars">★★★★★</div>
+    <span class="quote">„Endlich sehe ich auf einen Blick, welche Förderungen wirklich zu mir passen."</span>
+    <div class="t-meta">— Platzhalter (kannst du später durch echte Erfahrungen ersetzen)</div>
+  </div>
+
+  <p class="statline">Im Schnitt <b>9 passende Förderungen</b> pro Anfrage — aus über <b>5.000</b> österreichischen Förderungen, automatisch geprüft — zuletzt heute, <b>23:15 Uhr</b>.</p>
+</div>
+
+<!-- BEISPIEL-REPORTS -->
+<div class="wrap-wide examples" id="beispiele">
+  <div class="examples-grid">
+    <div>
+      <div class="ex-card">
+        <span class="beispiel">Beispiel</span>
+        <button class="zoom" data-shot="shot1">⌕ Zoom</button>
+        <div class="ex-shot" id="shot1">
+          <div class="xs-head"><span data-logo data-color="#0E7A4C" data-size="13"></span> Meine Förderungen</div>
+          <div><span class="xs-btn">↓ Als PDF</span><span class="xs-btn">✉ Per E-Mail teilen</span></div>
+          <div class="xs-stand">• Stand: 30. Juli 2026</div>
+          <div class="xs-label">Dein Förderplan</div>
+          <div class="xs-big">~€16.000</div>
+          <div class="xs-sub"><b>direkte Zuschüsse</b> — Geld, das du <b>nicht zurückzahlst</b>.<br>Realistische Summe für dein Projekt — stapelbar gerechnet, nicht die Summe aller Maximalbeträge.</div>
+          <div class="xs-grid">
+            <div class="xs-box"><div class="n">16</div><div class="l">Förderungen</div></div>
+            <div class="xs-box"><div class="n">⏱ 152 Tage</div><div class="l">bis zur nächstfrist</div></div>
+          </div>
+          <div class="xs-note">🏦 Dazu bis zu <b>€48.500</b> an Krediten &amp; Garantien (siehe unten) — günstige Finanzierung, keine direkte Auszahlung.</div>
+          <div class="xs-progress">Dein Fortschritt <span class="r">0 von 16 erledigt</span></div>
+        </div>
+      </div>
+      <p class="ex-cap">Beispiel: Dein Förderplan — ~€16.000 direkte Zuschüsse</p>
+    </div>
+    <div>
+      <div class="ex-card">
+        <span class="beispiel">Beispiel</span>
+        <button class="zoom" data-shot="shot2">⌕ Zoom</button>
+        <div class="ex-shot" id="shot2">
+          <div class="xs-head"><span data-logo data-color="#0E7A4C" data-size="13"></span> <span class="xs-label" style="font-size:.6rem">Hier startest du.</span></div>
+          <div class="xs-h3">Dein größter Hebel</div>
+          <div class="xs-step"><span class="dot">1</span><div><b>Spezialbonus: Luft-Wasser-Wärmepumpen (KLEN)</b> <span style="float:right;color:#0E7A4C;font-weight:700">bis €16.000</span>
+            <div><span class="xs-tag ok">⇄ stapelbar mit Wohnbausanierung: Einlagerung &amp; Abraumarbeiten (NÖ)</span><span class="xs-tag warn">⚠ Budget-limitiert — solange der Topf reicht</span></div>
+          </div></div>
+          <div class="xs-note">Im Rahmen der „Raus aus Öl und Gas"-Förderung werden auch Luft-Wasser-Wärmepumpen (Kombination mit PV empfohlen) stark subventioniert, wenn keine Fernwärme möglich ist.</div>
+          <div class="xs-h3" style="margin-top:9px">⇄ Schritt-für-Schritt Anleitung</div>
+          <div class="xs-step"><span class="dot">1</span><div>Lass dir von einem Energieberater bestätigen, dass ein Anschluss an die Fernwärme nicht möglich ist.</div></div>
+          <div class="xs-step"><span class="dot">2</span><div>Registriere dich online auf der KLEN-Förderplattform, um die Mittel zu reservieren (Antrags­fristen beachten!).</div></div>
+        </div>
+      </div>
+      <p class="ex-cap">Beispiel: Deine größten Hebel + was sich kombiniert</p>
+    </div>
+  </div>
+  <p class="examples-note">Beispiel · so ist dein Bericht aufgebaut — zum Vergrößern tippen</p>
+</div>
+
+<!-- DEIN FÖRDERBERICHT -->
+<section id="foerderungen">
+  <div class="wrap">
+    <p class="kicker">Dein Förderbericht</p>
+    <h2 class="display">Alles für deine Anträge, an einem Ort.</h2>
+    <ul class="checklist">
+      <li><span style="color:var(--mint)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10" stroke-opacity=".35"/><path d="m8 12 3 3 5-6"/></svg></span><span><b>Kombinierbarkeit:</b> Welche du legal stapeln kannst — und welche sich blockieren.</span></li>
+      <li><span style="color:var(--mint)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10" stroke-opacity=".35"/><path d="m8 12 3 3 5-6"/></svg></span><span><b>Anleitung:</b> Welche Unterlagen, wo &amp; wie — pro Förderung.</span></li>
+      <li><span style="color:var(--mint)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10" stroke-opacity=".35"/><path d="m8 12 3 3 5-6"/></svg></span><span><b>Ablehnungs-Schutz:</b> Versteckte Stolpersteine, damit es beim ersten Mal durchgeht.</span></li>
+      <li><span style="color:var(--mint)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10" stroke-opacity=".35"/><path d="m8 12 3 3 5-6"/></svg></span><span><b>Als PDF:</b> Für dich, die Bank oder den Energieberater.</span></li>
+    </ul>
+    <p class="price-line">Komplett <b>kostenlos</b>. Kein Abo. Keine versteckten Kosten.</p>
+
+    <div class="carousel" style="margin-top:30px">
+      <div class="car-track">
+        <div class="car-slide"><div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <span class="quote">„Der Schnell-Check dauert 2 Minuten — und zeigt Förderungen, die ich kannte."</span>
+          <div class="t-meta">— Platzhalter</div>
+        </div></div>
+        <div class="car-slide"><div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <span class="quote">„Sofort sichtbar: was mir zusteht, was kombinierbar ist, was zuerst kommt."</span>
+          <div class="t-meta">— Platzhalter</div>
+        </div></div>
+        <div class="car-slide"><div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <span class="quote">„Alle 1.148 Förderungen Österreichs — durchsuchbar und gratis."</span>
+          <div class="t-meta">— Platzhalter</div>
+        </div></div>
+      </div>
+      <div class="car-dots"><button class="on"></button><button></button><button></button></div>
+    </div>
+  </div>
+</section>
+
+<!-- SO FUNKTIONIERT'S -->
+<section style="padding-top:10px">
+  <div class="wrap">
+    <p class="kicker">So funktioniert's</p>
+    <h2 class="display">In drei Schritten zum Bericht.</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><h3>Beschreib dein Vorhaben</h3><p>Schreib, was du planst — oder beantworte ein paar kurze Fragen.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3>Sortiert statt Chaos</h3><p>Wir zeigen, welche dir zustehen, welche sich kombinieren, welche zuerst.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3>Schritt für Schritt beantragen</h3><p>Mit unseren Anleitungen stellst du jeden Antrag einfach.</p></div></div>
+    </div>
+    <div class="vs" style="margin-top:36px">
+      <div class="cell"><div class="amount old">€150–300</div><div class="lbl">Förderberater (pro Stunde)</div></div>
+      <div class="cell"><div class="amount hot">€0</div><div class="lbl">Meine Förderungen — kostenlos, sofort</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AUS ÜBER 5.000 FÖRDERUNGEN -->
+<section>
+  <div class="wrap">
+    <h2 class="display">Aus über 5.000 Förderungen.</h2>
+    <div class="fcards">
+      <div class="fcard"><div class="cat">Heizung &amp; Energie</div><div class="name">Ölkessel-raus-Bonus (Salzburg)</div><div class="amt">bis zu <b>€20.000</b></div></div>
+      <div class="fcard"><div class="cat">Sanierung</div><div class="name">Landes-Sanierungsförderung</div><div class="amt">bis zu <b>€50.000</b></div></div>
+      <div class="fcard"><div class="cat">Familie</div><div class="name">Familienbeihilfe + Bonus</div><div class="amt"><b>€138–200</b> monatlich</div></div>
+      <div class="fcard"><div class="cat">Photovoltaik</div><div class="name">EAG Stromspeicher (Bund)</div><div class="amt">bis zu <b>€7.500</b></div></div>
+    </div>
+    <div class="stats" style="margin-top:38px">
+      <div class="s"><div class="v">5.000+</div><div class="l">Förderungen</div></div>
+      <div class="s"><div class="v g">6.800+</div><div class="l">Anfragen aus ganz Österreich</div></div>
+      <div class="s"><div class="v">2 Min</div><div class="l">bis zum Ergebnis</div></div>
+      <div class="s"><div class="v g">Kostenlos</div><div class="l">kein Abo, keine Zahlung</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <h2 class="display">Gut zu wissen.</h2>
+    <div class="faq">
+      <details><summary>Ist der Service kostenlos? <span class="ar">▾</span></summary><div class="a">Ja — alles: Der Check und dein vollständiger Bericht mit Anleitungen, Unterlagen und Kombi-Reihenfolge sind kostenlos. Keine Zahlung, kein Abo, kein Konto.</div></details>
+      <details><summary>Die Infos sind doch öffentlich — warum zahlen? <span class="ar">▾</span></summary><div class="a">Du zahlst nichts — die Frage ist eher: Warum liegt das Wissen nur verstreut? Es verteilt sich über das Transparenzportal, 9 Landesförderstellen und Dutzende Stadt-Programme. Wir sortieren es für deine Situation: Was passt, was kombinierbar ist, welche Frist zuerst kommt.</div></details>
+      <details><summary>Wie viel Fördergeld verpasst ich ohne Check? <span class="ar">▾</span></summary><div class="a">Im Schnitt finden wir 9 passende Förderungen pro Anfrage — die meisten Nutzer kannten vorher 2–3 davon. Gerade Kombinationen (z.&nbsp;B. Sanierung + PV + Wärmepumpe) bleiben ohne Überblick liegen.</div></details>
+      <details><summary>Was bekomme ich im Bericht? <span class="ar">▾</span></summary><div class="a">Deinen persönlichen Bericht: jede passende Förderung mit Betrag, Schritt-für-Schritt-Anleitung zum Aufklappen, Unterlagen-Checkliste, Experten-Tipps und der Kombi-Reihenfolge — komplett kostenlos im Browser.</div></details>
+      <details><summary>Woher kommen die Daten? <span class="ar">▾</span></summary><div class="a">Aus dem Transparenzportal des Bundes, den Förderstellen aller 9 Bundesländer sowie ausgewählten Stadt- und Bezirksprogrammen — über 5.000 Programme, automatisiert auf Aktualität geprüft.</div></details>
+      <details><summary>Brauche ich ein Konto oder eine Zahlungsmethode? <span class="ar">▾</span></summary><div class="a">Nein — keine Registrierung, keine E-Mail, keine Zahlung. Du beschreibst dein Vorhaben und siehst deinen Bericht direkt im Browser.</div></details>
+      <details><summary>Was, wenn ich beim Antrag etwas falsch mache? <span class="ar">▾</span></summary><div class="a">Genau dafür gibt es den Ablehnungs-Schutz: versteckte Stolpersteine pro Förderung, damit es beim ersten Mal durchgeht — als Experte-Tipp direkt in jedem Antrags-Plan.</div></details>
+      <details><summary>Können Förderungen ausgehen? <span class="ar">▾</span></summary><div class="a">Ja — viele Programme sind budget-limitiert und gehen zeitweise aus. Deshalb zeigt dir der Bericht die Reihenfolge: Was du zuerst beantragen musst, bevor das Budget reicht.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2 class="serif">Schau, was dir zusteht.</h2>
+    <p>Dauert 2 Minuten. Kein Konto nötig.</p>
+    <button class="btn btn-primary" onclick="location.href='check.html'" style="max-width:340px">Jetzt starten →</button>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="f-links">
+      <a href="foerderungen.html"><b>Alle Förderungen</b></a><a href="#">Bundesweit</a><a href="#">Wien</a><a href="#">Niederösterreich</a><a href="#">Oberösterreich</a><a href="#">Salzburg</a><a href="#">Steiermark</a><a href="#">Tirol</a><a href="#">Kärnten</a><a href="#">Vorarlberg</a><a href="#">Burgenland</a><a href="#">Themen</a><a href="#">Neu &amp; geändert</a>
+    </div>
+    <div class="f-copy">© 2026 Meine Förderungen.at</div>
+    <div class="f-legal">
+      <a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a><a href="#">Widerruf</a><a href="#">Rückerstattung</a><a href="#faq">FAQ</a><a href="#">Über uns</a><a href="entwickler.html">Entwickler</a><a href="#" id="cookieLink">Cookie-Einstellungen</a>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox"><div class="lb-card"><button class="lb-close">✕</button><div class="lb-body"></div></div></div>
+
+<div class="cookie" id="cookieBar">
+  <p>Wir verwenden Cookies für essenzielle Funktionen. Optionale Marketing-Cookies nur mit deinem OK (TKG §165 / DSGVO).</p>
+  <button class="ok">OK</button><button class="set">Einstellungen</button>
+</div>
+<div class="cmodal" id="cookieModal"><div class="box">
+  <h3>Cookie-Einstellungen</h3>
+  <p>Diese Demo setzt nur essenzielle Cookies (deine Quiz-Antworten, diese Auswahl). Kein Tracking, keine Werbung.</p>
+  <button class="btn btn-primary">Speichern</button>
+</div></div>
+
+<script src="assets/app.js"></script>
+<script>
+document.getElementById('findBtn').onclick=()=>{
+  const t=document.getElementById('freeText').value.trim();
+  const p=new URLSearchParams(); if(t) p.set('text',t);
+  location.href='bericht.html?'+p.toString();
+};
+document.getElementById('cookieLink').onclick=e=>{e.preventDefault();document.getElementById('cookieModal').classList.add('open');};
+try{
+  const prof=JSON.parse(localStorage.getItem('hdm-profil')||'null');
+  if(prof && Object.keys(prof).length){
+    document.getElementById('meinBericht').style.display='flex';
+    document.getElementById('profilHinweis').style.display='block';
+    document.getElementById('meinBericht').onclick=()=>location.href='bericht.html';
+  }
+}catch(e){}
+</script>
+</body>
+</html>

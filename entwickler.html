@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Entwickler &amp; API-Nutzung — Meine Förderungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..640&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 27V7M7 16h13M17 7h8v8M25 7 15.5 16.5' stroke='%234ADE80' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><span data-logo data-color="var(--mint)" data-size="30"></span> Meine Förderungen</a>
+    <nav class="nav-links"><a href="index.html#foerderungen">Förderungen</a><a href="index.html#faq">FAQ</a></nav>
+  </div>
+</header>
+
+<div class="wrap doc" style="padding:44px 20px 30px">
+  <h1>Entwickler &amp; API-Nutzung</h1>
+  <p class="lead">Technische Dokumentation zu Meine Förderungen — was wir tun, welche APIs wir nutzen und warum.</p>
+
+  <h2>Was ist Meine Förderungen?</h2>
+  <p><b>Meine Förderungen</b> ist ein deutschsprachiges Förder-Finder-Tool für Privatpersonen in Österreich. Unsere Nutzer:innen beschreiben ihr Vorhaben (z.&nbsp;B. Heizungstausch, Photovoltaik, Familienzuschuss) oder beantworten kurze Fragen, und wir liefern eine personalisierte Liste passender Förderprogramme aus Bund- und allen 9 Bundesland-Quellen.</p>
+  <p><b>Produkt:</b> Ein kostenloser detaillierter Report mit allen passenden Förderungen, Antrags-Anleitungen, Ablehnungsgründen und direkten Links zu offiziellen Antragsformularen.</p>
+  <p><b>Katalog:</b> Aktuell über 5.000 aktive Förderprogramme aus Transparenzportal des Bundes, Landesförderstellen aller 9 Bundesländer sowie ausgewählte Stadt- und Bezirksprogramme. Laufend automatisiert auf Aktualität geprüft.</p>
+  <p><b>Zielgruppe:</b> Ausschließlich Privatpersonen in Österreich. Wir betreiben kein B2B-Tool, keine White-Label-Lösung und keine API-Wiederverkauf für Dritte.</p>
+
+  <h2>Nutzung der Google Ads API</h2>
+  <p>Wir verwenden die Google Ads API ausschließlich für <b>unser eigenes Google Ads-Konto</b>, um die Performance unserer Akquise-Kampagnen zu messen und zu optimieren. Konkrete Anwendungsfälle:</p>
+  <ul class="doc-list">
+    <li><b>Offline-Conversion-Upload (Enhanced Conversions for Leads):</b> Wenn ein Nutzer über einen Google Ads-Klick auf unsere Seite kommt und später einen Bericht erstellt (Lead), übermitteln wir das gehashte Lead-Profil (E-Mail, Telefon, Adresse — alles SHA-256-gehashed) zusammen mit der vom Klick stammenden Google Click ID (GCLID) per <code>customers/{id}:uploadClickConversions</code> Endpoint, damit Google die Conversion korrekt der ursprünglichen Anzeige zuordnen kann.</li>
+    <li><b>Performance-Reporting:</b> Tägliches Pull von Spend, Clicks, Impressions, CTR, CPA, Impression-Share via Google Ads SearchStream REST-Endpoint, um unsere ROAS-Trajektorie in unserem internen Admin-Dashboard darzustellen.</li>
+    <li><b>Keine programmatische Account-Manipulation:</b> Wir ändern weder Bids noch Budgets noch Keywords noch Ad-Copy automatisiert. Alle Kampagnen-Aktionen erfolgen manuell über die Google Ads Oberfläche oder den Google Ads Editor.</li>
+  </ul>
+  <p><b>Compliance-Hinweis:</b> Alle übermittelten personenbezogenen Daten sind vorab mit SHA-256 gehasht (gem. Google Ads PII-Hashing-Spec). Das Einverständnis zur Datenübermittlung holen wir explizit vom Nutzer im Cookie-Consent-Banner ein (TKG §165 + DSGVO Art. 6 lit. a). Ohne Einverständnis erfolgt keine Server-CAPI-Übermittlung an Google.</p>
+
+  <h2>Nutzung der Meta Conversions API</h2>
+  <p>Analog zur Google Ads API verwenden wir die Meta Conversions API (CAPI) für unser eigenes Meta-Ads-Konto, um Conversion-Events (PageView, Lead) server-seitig an Meta zu übermitteln. Dies erhöht die Attributions-Genauigkeit gegenüber rein client-seitigem Pixel-Tracking (das durch Browser-Cookie-Blockierung und Ad-Blocker stark eingeschränkt ist).</p>
+  <p>Auch hier: gehashte PII, explizites Einverständnis, ausschließlich für eigenes Konto.</p>
+
+  <h2>Technischer Stack</h2>
+  <ul class="doc-list">
+    <li>Next.js 15 (App Router) auf Netlify</li>
+    <li>Supabase Postgres (REST)</li>
+    <li>Stripe (live mode, EU-Region)</li>
+    <li>Resend (Transaktions-E-Mails)</li>
+    <li>Plausible (Privacy-First-Analytics)</li>
+    <li>ContentSquare (Session-Recording mit Auto-Masking aller PII)</li>
+  </ul>
+
+  <h2>Datenschutz-Architektur</h2>
+  <p>Vollständige Details siehe <u style="cursor:pointer">Datenschutzerklärung</u>. Zusammenfassung für API-Compliance-Zwecke:</p>
+  <ul class="doc-list">
+    <li>Alle PII (E-Mail, Telefon, Adresse) wird vor jeder API-Übermittlung mit SHA-256 gehasht (Vor-Lowercase + Trim gem. Google/Meta-Spec).</li>
+    <li>Cookie-Consent-Banner gem. TKG §165 + DSGVO Art. 6 lit. a. Ohne explizites Marketing-Consent: 0 CAPI-Calls.</li>
+    <li>Row-Level-Security (RLS) auf allen Supabase-Tabellen. Service-Role-Key ausschließlich server-seitig.</li>
+    <li>Keine Weitergabe von Daten an Dritte außer den oben genannten Werbe-Netzwerken (Google, Meta) für Conversion-Tracking — und dann nur mit explizitem Einverständnis.</li>
+  </ul>
+
+  <div class="contact">
+    <h2>Entwickler-Kontakt</h2>
+    <p style="margin-bottom:12px">Für API-Compliance-Anfragen, Datenschutz-Audit-Anfragen, technische Integrations-Fragen oder Security-Disclosures:</p>
+    <a href="mailto:hallo@quell-app: holdirmehr.at (private Kopie)">hallo@quell-app: holdirmehr.at (private Kopie) ↗</a>
+    <p class="rt">Antwortzeit typischerweise innerhalb von 48 Stunden (Wien-Geschäftszeit).</p>
+  </div>
+
+  <a class="more-link" href="index.html">Mehr über Meine Förderungen →</a>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="f-links">
+      <a href="index.html#foerderungen"><b>Alle Förderungen</b></a><a href="#">Bundesweit</a><a href="#">Wien</a><a href="#">Niederösterreich</a><a href="#">Oberösterreich</a><a href="#">Salzburg</a><a href="#">Steiermark</a><a href="#">Tirol</a><a href="#">Kärnten</a><a href="#">Vorarlberg</a><a href="#">Burgenland</a><a href="#">Themen</a><a href="#">Neu &amp; geändert</a>
+    </div>
+    <div class="f-copy">© 2026 Meine Förderungen.at</div>
+    <div class="f-legal">
+      <a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a><a href="#">Widerruf</a><a href="#">Rückerstattung</a><a href="index.html#faq">FAQ</a><a href="#">Über uns</a><a href="entwickler.html">Entwickler</a><a href="#">Cookie-Einstellungen</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

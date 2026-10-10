@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "mimosa-finding-ledger-batch/v1",
+  "batchId": "pretooluse-322a58bb02c94df252ebdaa2f3f2a44b",
+  "runId": null,
+  "runStatus": "completed",
+  "coverage": {
+    "status": "complete",
+    "reasons": []
+  },
+  "source": {
+    "component": "zcode-hook",
+    "operationId": "PreToolUse"
+  },
+  "revision": null,
+  "diffHash": null,
+  "rulesVersion": null,
+  "sessionHash": "c4cefba5605c3303c88b3873dcd450430219c03d052c19dc968d96b647bcb695",
+  "reportRef": null,
+  "events": [
+    {
+      "eventId": "hook-c85a5ce1e586b5a8e3bc5b11f5f47bea",
+      "findingId": "mimosa-7b05fb6ccd2d27ed82150d95",
+      "type": "finding_blocked",
+      "at": "2026-10-10T03:26:54.055Z",
+      "identity": {
+        "projectRelativeFile": "crawl.py",
+        "ruleId": "security",
+        "codeEvidenceHash": "a1621debd2c83df33a2db0c9026f3d3c01c0995193879129e3dba7b3b49fa9eb",
+        "confidence": "stable"
+      },
+      "scope": "direct",
+      "line": 133,
+      "endLine": 133,
+      "reasonCode": "deny",
+      "reportedToAgent": true,
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "evidenceHash": "a1621debd2c83df33a2db0c9026f3d3c01c0995193879129e3dba7b3b49fa9eb"
+      },
+      "sequence": 0
+    },
+    {
+      "eventId": "hook-eba2c9435f1da0518037fae7701dfaba",
+      "findingId": "mimosa-73e418bb620f9d637c4706bf",
+      "type": "finding_blocked",
+      "at": "2026-10-10T03:26:54.056Z",
+      "identity": {
+        "projectRelativeFile": "crawl.py",
+        "ruleId": "security",
+        "codeEvidenceHash": "01a6be0f2f437ea7596208c6fdb1995a2ddc85847b2f19ed16b0d8953fedc931",
+        "confidence": "stable"
+      },
+      "scope": "direct",
+      "line": 134,
+      "endLine": 134,
+      "reasonCode": "deny",
+      "reportedToAgent": true,
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "evidenceHash": "01a6be0f2f437ea7596208c6fdb1995a2ddc85847b2f19ed16b0d8953fedc931"
+      },
+      "sequence": 1
+    }
+  ],
+  "observedFindingIds": [],
+  "verifiedFiles": [],
+  "recordedAt": "2026-10-10T03:26:54.265Z"
+}
